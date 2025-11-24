@@ -22,6 +22,7 @@ export default function Navbar() {
             <div className="space-x-4">
                 <Link href="/">Home</Link>
 
+                <Link href="/myPage">MyPage</Link>
                 {isLoggedIn ? (
                     <button
                         onClick={handleLogout}
