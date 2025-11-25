@@ -5,16 +5,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-    const { isLoggedIn, logout, depart } = useAuth();
+    const { isLoggedIn, logout } = useAuth();
     const router = useRouter();
 
     const handleLogout = () => {
         logout();
-        router.push("/");
-    };
-
-    const handleDeparture = () => {
-        depart();
         router.push("/");
     };
 
@@ -73,20 +68,12 @@ export default function Navbar() {
                     {/* 인증 버튼 */}
                     <div className="flex items-center space-x-2">
                         {isLoggedIn ? (
-                            <>
-                                <button
-                                    onClick={handleDeparture}
-                                    className="px-4 py-2 rounded-lg text-sm font-medium bg-red-800/80 hover:bg-red-900 hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
-                                >
-                                    🗑️ 탈퇴
-                                </button>
-                                <button
-                                    onClick={handleLogout}
-                                    className="px-4 py-2 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
-                                >
-                                    🚪 Logout
-                                </button>
-                            </>
+                            <button
+                                onClick={handleLogout}
+                                className="px-4 py-2 rounded-lg text-sm font-medium bg-red-600 hover:bg-red-700 hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
+                            >
+                                🚪 Logout
+                            </button>
                         ) : (
                             <Link
                                 href="/login"

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { AccountResponse } from "@/types/account";
 import Image from "next/image";
+import ConfirmDialog from "@/components/common/ConfirmDialog";
 
 export default function MyPage() {
     const [account, setAccount] = useState<AccountResponse | null>(null);
@@ -20,7 +21,8 @@ export default function MyPage() {
         target_amount: 0,
     });
     const [submitting, setSubmitting] = useState(false);
-    const { isLoggedIn } = useAuth();
+    const [showDepartureDialog, setShowDepartureDialog] = useState(false);
+    const { isLoggedIn, depart } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -178,6 +180,20 @@ export default function MyPage() {
         } finally {
             setSubmitting(false);
         }
+    };
+
+    const handleDepartureClick = () => {
+        setShowDepartureDialog(true);
+    };
+
+    const handleDepartureConfirm = () => {
+        setShowDepartureDialog(false);
+        depart();
+        router.push("/");
+    };
+
+    const handleDepartureCancel = () => {
+        setShowDepartureDialog(false);
     };
 
     if (loading) {
@@ -471,9 +487,36 @@ export default function MyPage() {
                                 </div>
                             </div>
                         </form>
+
+                        {/* 회원 탈퇴 버튼 */}
+                        {isLoggedIn && (
+                            <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-700">
+                                <button
+                                    onClick={handleDepartureClick}
+                                    className="w-full sm:w-auto px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                                >
+                                    회원 탈퇴
+                                </button>
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">
+                                    회원 탈퇴 시 모든 데이터가 삭제되며 복구할 수 없습니다.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
+
+            {/* 회원 탈퇴 확인 다이얼로그 */}
+            <ConfirmDialog
+                isOpen={showDepartureDialog}
+                title="회원 탈퇴"
+                message={`정말로 탈퇴하시겠습니까?\n\n탈퇴 시 모든 데이터가 삭제되며,\n이 작업은 되돌릴 수 없습니다.`}
+                confirmText="탈퇴"
+                cancelText="취소"
+                confirmColor="red"
+                onConfirm={handleDepartureConfirm}
+                onCancel={handleDepartureCancel}
+            />
         </div>
     );
 }
