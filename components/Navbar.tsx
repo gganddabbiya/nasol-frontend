@@ -5,11 +5,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-    const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn, logout, depart } = useAuth();
     const router = useRouter();
 
     const handleLogout = () => {
         logout();
+        router.push("/");
+    };
+
+    const handleDeparture = () => {
+        depart();
         router.push("/");
     };
 
@@ -30,6 +35,10 @@ export default function Navbar() {
                     미래 자산 예측
                 </Link>
 
+                <Link href="/tax_credit" className="hover:underline">
+                    세액 공제 확인
+                </Link>
+
                 <Link href="/myPage">MyPage</Link>
                 {isLoggedIn ? (
                     <button
@@ -45,6 +54,16 @@ export default function Navbar() {
                     >
                         Login
                     </Link>
+                )}
+                {isLoggedIn ? (
+                    <button
+                        onClick={handleDeparture}
+                        className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+                    >
+                        Departure
+                    </button>
+                ) : (
+                    <></>
                 )}
             </div>
         </nav>

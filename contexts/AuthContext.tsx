@@ -6,12 +6,14 @@ interface AuthContextType {
     isLoggedIn: boolean;
     refresh: () => void;
     logout: () => void;
+    depart: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
     isLoggedIn: false,
     refresh: () => {},
     logout: () => {},
+    depart: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -43,13 +45,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
+    const depart = () => {
+        console.log("[Auth] Departing (회원탈퇴)...");
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/authentication/departure`, {
+            method: "POST",
+            credentials: "include", // 쿠키 포함 (session_id 전송)
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("[Auth] Departure response:", data);
+                if (data.success) {
+                    console.log("[Auth] Account deleted successfully");
+                    setIsLoggedIn(false); // 로그인 상태 false로 변경
+                } else {
+                    console.error("[Auth] Departure failed:", data.message);
+                    alert(`회원탈퇴 실패: ${data.message}`);
+                }
+            })
+            .catch((err) => {
+                console.error("[Auth] Departure request failed:", err);
+                alert("회원탈퇴 중 오류가 발생했습니다.");
+            });
+    };
+
     // 처음 로딩될 때 1번만 실행
     useEffect(() => {
         refresh();
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, refresh, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, refresh, logout, depart }}>
             {children}
         </AuthContext.Provider>
     );
