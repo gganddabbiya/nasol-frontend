@@ -22,6 +22,10 @@ export default function Navbar() {
             <div className="space-x-4">
                 <Link href="/">Home</Link>
 
+                <Link href="/flow" className="hover:underline">
+                    Upload
+                </Link>
+
                 <Link href="/myPage">MyPage</Link>
                 {isLoggedIn ? (
                     <button
