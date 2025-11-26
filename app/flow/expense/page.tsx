@@ -141,8 +141,8 @@ export default function ExpensePage() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto space-y-8 p-6">
-            {/* 헤더 섹션 */}
+        <div className="max-w-4xl mx-auto space-y-4 px-6 py-3">
+           {/* 헤더 섹션 */}
             <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                     지출 자료 입력
@@ -152,13 +152,45 @@ export default function ExpensePage() {
                 </p>
             </div>
 
+            {/* 보안 안내 문구 */}
+            <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg">
+                <svg
+                    className="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                </svg>
+                <p className="text-sm">
+                    업로드된 자료는 보안을 위해 최대 24시간 암호화되어 관리되며, 서버에 저장되지 않습니다.
+                </p>
+            </div>
+
             {/* 에러 메시지 */}
             {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                    {error}
+                <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    <svg
+                        className="w-5 h-5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <p className="text-sm">{error}</p>
                 </div>
             )}
-
             {/* 입력 방식 선택 */}
             <div className="flex gap-2 border-b border-gray-200">
                 <button
