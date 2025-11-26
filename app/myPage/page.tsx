@@ -79,12 +79,12 @@ export default function MyPage() {
                 setAccount(data);
                 // 편집 폼 초기화
                 setEditForm({
-                    nickname: data.nickname  ? data.nickname : "",
-                    profile_image: data.profile_image ? data.profile_image : "",
-                    phone_number: data.phone_number ? data.phone_number : "",
-                    automatic_analysis_cycle: data.automatic_analysis_cycle ? data.automatic_analysis_cycle : 0,
-                    target_period: data.target_period ? data.target_period : 0,
-                    target_amount: data.target_amount ? data.target_amount : 0,
+                    nickname: data?.nickname ?? "",
+                    profile_image: data?.profile_image ?? "",
+                    phone_number: data?.phone_number ?? "",
+                    automatic_analysis_cycle: data?.automatic_analysis_cycle ?? 0,
+                    target_period: data?.target_period ?? 0,
+                    target_amount: data?.target_amount ?? 0,
                 });
             } catch (err) {
                 console.error("[MyPage] Failed to fetch account:", err);
@@ -108,12 +108,12 @@ export default function MyPage() {
     const handleCancel = () => {
         if (account) {
             setEditForm({
-                nickname: account.nickname ? account.nickname : "",
-                profile_image: account.profile_image ? account.profile_image : "",
-                phone_number: account.phone_number ? account.phone_number : "",
-                automatic_analysis_cycle: account.automatic_analysis_cycle ? account.automatic_analysis_cycle : 0,
-                target_period: account.target_period ? account.target_period : 0,
-                target_amount: account.target_amount ? account.target_amount : 0,
+                nickname: account?.nickname ?? "",
+                profile_image: account?.profile_image ?? "",
+                phone_number: account?.phone_number ?? "",
+                automatic_analysis_cycle: account?.automatic_analysis_cycle ?? 0,
+                target_period: account?.target_period ?? 0,
+                target_amount: account?.target_amount ?? 0,
             });
         }
         setIsEditing(false);
