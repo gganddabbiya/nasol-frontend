@@ -5,11 +5,13 @@ export default function StepActions({
                                         onNext,
                                         onSkip,
                                         nextLabel = "다음",
+                                        nextDisabled = false,
                                     }: {
     onPrev?: () => void;
     onNext?: () => void;
     onSkip?: () => void;
     nextLabel?: string;
+    nextDisabled?: boolean;
 }) {
     return (
         <div className="flex justify-end gap-3 mt-10">
@@ -24,7 +26,12 @@ export default function StepActions({
             {onNext && (
                 <button
                     onClick={onNext}
-                    className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+                    disabled={nextDisabled}
+                    className={`px-5 py-2 rounded-lg transition-colors ${
+                        nextDisabled
+                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                            : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
                 >
                     {nextLabel}
                 </button>
