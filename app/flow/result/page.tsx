@@ -12,12 +12,29 @@ interface Summary {
     status: string;
 }
 
+// 소득 카테고리 타입
+interface IncomeCategory {
+    [key: string]: string | number | Record<string, string | number>;
+}
+
+// 지출 카테고리 타입
+interface ExpenseCategory {
+    [key: string]: string | number | Record<string, string | number>;
+}
+
+// 차트 데이터 타입
+interface ChartData {
+    income_by_category?: Record<string, number>;
+    expense_by_main_category?: Record<string, number>;
+    expense_detail?: ExpenseCategory;
+}
+
 interface ResultData {
     success: boolean;
     summary: Summary;
-    income: any;
-    expense: any;
-    chart_data: any;
+    income: IncomeCategory;
+    expense: ExpenseCategory;
+    chart_data: ChartData;
 }
 
 export default function ResultPage() {
@@ -41,11 +58,13 @@ export default function ResultPage() {
             );
 
             setData(response.data);
-        } catch (err: any) {
+        } catch (err: unknown) {
             const errorMessage =
-                err.response?.data?.detail ||
-                err.message ||
-                "데이터를 불러오는데 실패했습니다.";
+                err instanceof Error
+                    ? err.message
+                    : axios.isAxiosError(err)
+                    ? err.response?.data?.detail || "데이터를 불러오는데 실패했습니다."
+                    : "데이터를 불러오는데 실패했습니다.";
             setError(errorMessage);
         } finally {
             setIsLoading(false);
@@ -172,7 +191,7 @@ export default function ResultPage() {
                         소득 상세
                     </h3>
                     <div className="space-y-3">
-                        {Object.entries(income).map(([key, value]: [string, any]) => {
+                        {Object.entries(income).map(([key, value]) => {
                             if (typeof value === "object" && value !== null) {
                                 return (
                                     <div key={key} className="space-y-2">
@@ -221,7 +240,7 @@ export default function ResultPage() {
                         지출 상세
                     </h3>
                     <div className="space-y-3">
-                        {Object.entries(expense).map(([key, value]: [string, any]) => {
+                        {Object.entries(expense).map(([key, value]) => {
                             if (typeof value === "object" && value !== null) {
                                 return (
                                     <div key={key} className="space-y-2">
