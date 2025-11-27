@@ -47,12 +47,6 @@ export default function Home() {
                                 >
                                     🔐 로그인하고 시작하기
                                 </Link>
-                                <Link
-                                    href="/flow"
-                                    className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-semibold text-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-200 hover:scale-105 shadow-md"
-                                >
-                                    둘러보기
-                                </Link>
                             </>
                         )}
                     </div>

@@ -9,7 +9,6 @@ export default function ProgressSteps() {
     const steps = [
         { label: "소득 자료", href: "/flow/income" },
         { label: "지출 자료", href: "/flow/expense" },
-        { label: "사용자 정보", href: "/flow/params" },
         { label: "결과", href: "/flow/result" },
     ];
 
