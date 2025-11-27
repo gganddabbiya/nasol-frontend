@@ -34,14 +34,7 @@ export default function Navbar() {
 
                     {/* 네비게이션 링크 */}
                     <div className="hidden md:flex items-center space-x-2">
-                        <Link 
-                            href="/" 
-                            className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-blue-600 hover:shadow-md transition-all duration-200 hover:scale-105"
-                        >
-                            🏠 Home
-                        </Link>
-
-                        <Link 
+                        <Link
                             href="/flow" 
                             className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-blue-600 hover:shadow-md transition-all duration-200 hover:scale-105"
                         >
@@ -157,13 +150,7 @@ export default function Navbar() {
 
                 {/* 모바일 메뉴 */}
                 <div className="md:hidden pb-4 space-y-2">
-                    <Link 
-                        href="/" 
-                        className="block px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-blue-600 transition-all duration-200"
-                    >
-                        🏠 Home
-                    </Link>
-                    <Link 
+                    <Link
                         href="/flow" 
                         className="block px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-blue-600 transition-all duration-200"
                     >
