@@ -79,6 +79,12 @@ export default function Navbar() {
                                         >
                                             💸 연말정산 공제 내역 확인
                                         </Link>
+                                        <Link
+                                            href="/financial_guide"
+                                            className="block px-4 py-3 text-sm hover:bg-green-600 transition-colors duration-200 border-t border-gray-700"
+                                        >
+                                            🤓 목표 금액 재무 가이드
+                                        </Link>
                                     </div>
                                 </div>
                             )}
@@ -190,6 +196,13 @@ export default function Navbar() {
                                     onClick={() => setIsMobileAnalysisOpen(false)}
                                 >
                                     💸 연말정산 공제 내역 확인
+                                </Link>
+                                <Link
+                                    href="/financial_guide"
+                                    className="block px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-green-600 transition-all duration-200"
+                                    onClick={() => setIsMobileAnalysisOpen(false)}
+                                >
+                                    🤓 목표 금액 재무 가이드
                                 </Link>
                             </div>
                         )}
